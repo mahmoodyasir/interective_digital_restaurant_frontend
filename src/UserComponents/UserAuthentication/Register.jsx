@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import toast from "react-hot-toast";
+import Axios from "axios";
+import {domain} from "../../env";
 
 const Register = () => {
     const {register, formState: {errors}, handleSubmit} = useForm();
     const [registerError, setRegisterError] = useState('');
+    const navigate = useNavigate();
 
-    const handleRegister = (data) => {
+    const handleRegister = async (data) => {
         setRegisterError('');
         if(data?.password1 !== data?.password2)
         {
@@ -15,7 +18,21 @@ const Register = () => {
         }
         else
         {
-            console.log(data?.email, data?.password1, data?.password2);
+            await Axios({
+                method: "post",
+                url: `${domain}/auth/register/`,
+                data: {
+                    "email": data?.email,
+                    "password": data?.password1
+                }
+            }).then(response => {
+                if(response.data["error"] === false)
+                {
+                    toast.success("User is Created. Please Login Now.");
+                    navigate('/login');
+
+                }
+            })
         }
     }
 

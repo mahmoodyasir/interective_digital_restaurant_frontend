@@ -7,9 +7,9 @@ import {domain, header} from "../../env";
 import toast from "react-hot-toast";
 
 const Login = () => {
-    const {currentPage, setCurrentPage} = useContext(stateContext);
+    const {isLoggedIn, setIsLoggedIn} = useContext(stateContext);
     const {register, formState: {errors}, handleSubmit} = useForm()
-    const [{profile}, dispatch] = useGlobalState();
+    const [{profile, page_reload}, dispatch] = useGlobalState();
     const [loginError, setLoginError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
@@ -28,10 +28,11 @@ const Login = () => {
         }).then(response => {
             console.log(response.data['token'])
             window.localStorage.setItem("token", response.data['token'])
-            setCurrentPage(true)
+            setIsLoggedIn(true)
             toast.success("Successfully Logged In !! ")
             navigate(from, {replace: true});
-        }).catch(_=>{
+            navigate(0);
+        }).catch(_ => {
             toast.error("Your username or password is incorrect !! Try Again ....");
         })
 

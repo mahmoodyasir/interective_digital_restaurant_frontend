@@ -1,5 +1,5 @@
 .parent-list{
-    @apply md:ml-8 text-xl md:my-0 my-7;
+    @apply md:ml-8 md:my-0 my-7 ;
 }
 
 .each-link{

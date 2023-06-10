@@ -9,8 +9,9 @@ export const stateContext = createContext();
 export const Globalstate = ({reducer, initialstate, children}) => {
 
     const [currentPage, setCurrentPage] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const allState = {currentPage, setCurrentPage}
+    const allState = {currentPage, setCurrentPage, isLoggedIn, setIsLoggedIn}
 
     return (
         <Context.Provider value={useReducer(reducer, initialstate)}>

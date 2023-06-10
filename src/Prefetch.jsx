@@ -1,12 +1,10 @@
-import {RouterProvider} from "react-router-dom";
-import router from "./Routes/Routes";
-import {Toaster} from "react-hot-toast";
-import {useContext, useEffect} from "react";
+import React, {useContext, useEffect} from 'react';
 import {stateContext, useGlobalState} from "./state/provider";
 import {domain, header, userToken} from "./env";
 import Axios from "axios";
 
-function App() {
+const Prefetch = () => {
+
     const { isLoggedIn, setIsLoggedIn} = useContext(stateContext);
     const [{profile, page_reload}, dispatch] = useGlobalState();
 
@@ -29,14 +27,12 @@ function App() {
             getUserProfile();
         }
     }, [dispatch, page_reload]);
-  return (
-    <div className="">
-      <RouterProvider router={router}>
 
-      </RouterProvider>
-        <Toaster/>
-    </div>
-  );
-}
 
-export default App;
+    return (
+        <>
+        </>
+    );
+};
+
+export default Prefetch;

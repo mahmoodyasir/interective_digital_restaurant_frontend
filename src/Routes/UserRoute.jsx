@@ -5,11 +5,11 @@ import Axios from "axios";
 import {Navigate, useLocation, useNavigate} from "react-router-dom";
 
 const UserRoute = ({children}) => {
-    const {currentPage, setCurrentPage} = useContext(stateContext);
+    const { isLoggedIn, setIsLoggedIn} = useContext(stateContext);
     const [{profile, page_reload}, dispatch] = useGlobalState();
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(currentPage)
+    console.log(isLoggedIn)
 
     // useEffect(() => {
     //     const get_data = async () => {
@@ -32,7 +32,7 @@ const UserRoute = ({children}) => {
     // }, [dispatch, page_reload]);
 
 
-    if (currentPage)
+    if (isLoggedIn)
     {
         return children;
     }
