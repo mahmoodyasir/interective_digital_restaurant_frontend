@@ -4,9 +4,10 @@ import {Outlet} from "react-router-dom";
 
 const UserLayout = () => {
     return (
-        <div className="bg-amber-50 w-full h-screen">
-            <Navbar/>
-            <Outlet/>
+        <div className="">
+            <Navbar />
+            <div className="mb-24"></div>
+            <Outlet />
 
         </div>
     );

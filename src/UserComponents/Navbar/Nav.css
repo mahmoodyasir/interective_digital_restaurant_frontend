@@ -1,0 +1,7 @@
+.parent-list{
+    @apply md:ml-8 text-xl md:my-0 my-7;
+}
+
+.each-link{
+    @apply text-gray-800 hover:text-white rounded p-2 hover:bg-violet-600 duration-500
+}
