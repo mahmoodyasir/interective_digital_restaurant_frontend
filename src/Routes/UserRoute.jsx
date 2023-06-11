@@ -9,30 +9,9 @@ const UserRoute = ({children}) => {
     const [{profile, page_reload}, dispatch] = useGlobalState();
     const location = useLocation();
     const navigate = useNavigate();
-    console.log(isLoggedIn)
-
-    // useEffect(() => {
-    //     const get_data = async () => {
-    //         if (userToken !== null)
-    //         {
-    //             await Axios({
-    //                 method: "get",
-    //                 url: `${domain}/auth/user/`,
-    //                 headers: header
-    //             }).then(response => {
-    //                 console.log(response.data["data"][0])
-    //                 dispatch({
-    //                     type: "ADD_PROFILE",
-    //                     profile: response.data["data"][0]
-    //                 })
-    //             })
-    //             get_data()
-    //         }
-    //     }
-    // }, [dispatch, page_reload]);
 
 
-    if (isLoggedIn)
+    if (profile !== null)
     {
         return children;
     }

@@ -9,6 +9,7 @@ import Profile from "../UserComponents/Profile/Profile";
 import UserRoute from "./UserRoute";
 import Home from "../CommonComponents/Home";
 import {domain} from "../env";
+import Cart from "../UserComponents/Order/Cart";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
               path: "/profile",
               element: <UserRoute><Profile/></UserRoute>
+            },
+            {
+              path: "/cart",
+              element: <UserRoute><Cart/></UserRoute>
             },
         ]
 

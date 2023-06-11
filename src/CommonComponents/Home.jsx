@@ -6,7 +6,6 @@ const Home = () => {
 
     const allMenu = useLoaderData();
     const [menuData, setMenuData] = useState(allMenu?.results);
-    console.log(allMenu.results)
 
     return (
         <div className="">

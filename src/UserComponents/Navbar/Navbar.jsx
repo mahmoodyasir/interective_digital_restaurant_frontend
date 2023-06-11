@@ -1,13 +1,20 @@
 import React, {useContext, useState} from 'react';
 import {Link} from "react-router-dom";
 import './Nav.css'
+import {BsCart4} from "react-icons/bs";
 import {stateContext, useGlobalState} from "../../state/provider";
 
 const Navbar = () => {
 
     const {isLoggedIn, setIsLoggedIn} = useContext(stateContext);
-    const [{profile, page_reload}, dispatch] = useGlobalState();
+    const [{profile, page_reload, cart_incomplete}, dispatch] = useGlobalState();
     let [open, setOpen] = useState(false);
+
+    let quantity = 0;
+
+    for (let i = 0; i < cart_incomplete?.cartproduct?.length; i++) {
+        quantity = quantity + (cart_incomplete?.cartproduct[i]?.quantity);
+    }
 
     const logout = () => {
         console.log("Logout")
@@ -52,7 +59,13 @@ const Navbar = () => {
                                     <Link to="" className='each-link'>ORDERS</Link>
                                 </li>
                                 <li className='parent-list'>
-                                    <Link to="" className='each-link'>CART</Link>
+                                    <Link to="/cart" className='each-link'>
+                                        <div className="indicator">
+                                            <span className="indicator-item badge badge-success font-bold">{quantity}</span>
+                                            <BsCart4 className="text-2xl"/>
+
+                                        </div>
+                                    </Link>
                                 </li>
                                 <li className='parent-list'>
                                     <Link to="" className='each-link'>FEEDBACKS</Link>
