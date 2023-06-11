@@ -14,6 +14,7 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+    console.log(from)
 
 
     const handleLogin = async (data) => {
@@ -29,9 +30,17 @@ const Login = () => {
             console.log(response.data['token'])
             window.localStorage.setItem("token", response.data['token'])
             setIsLoggedIn(true)
-            toast.success("Successfully Logged In !! ")
-            navigate(from, {replace: true});
-            navigate(0);
+            if(from === '/')
+            {
+                toast.success("Successfully Logged In !! ")
+                window.location.href = '/'
+            }
+            else
+            {
+                toast.success("Successfully Logged In !! ")
+                navigate(from, {replace: true});
+                navigate(0);
+            }
         }).catch(_ => {
             toast.error("Your username or password is incorrect !! Try Again ....");
         })

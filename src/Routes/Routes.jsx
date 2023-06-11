@@ -7,6 +7,8 @@ import Login from "../UserComponents/UserAuthentication/Login";
 import Register from "../UserComponents/UserAuthentication/Register";
 import Profile from "../UserComponents/Profile/Profile";
 import UserRoute from "./UserRoute";
+import Home from "../CommonComponents/Home";
+import {domain} from "../env";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,11 @@ const router = createBrowserRouter([
         path: "/",
         element: <UserLayout/>,
         children: [
+            {
+                path: "/",
+                element: <Home/>,
+                loader: () => fetch(`${domain}/api/menu/`)
+            },
             {
                 path: "/login",
                 element: <Login/>
