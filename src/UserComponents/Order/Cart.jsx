@@ -147,6 +147,7 @@ const Cart = () => {
                                     }
 
                                     </tbody>
+
                                     <tfoot>
                                     <tr>
                                         <th></th>
