@@ -10,6 +10,7 @@ import UserRoute from "./UserRoute";
 import Home from "../CommonComponents/Home";
 import {domain} from "../env";
 import Cart from "../UserComponents/Order/Cart";
+import MenuDetails from "../UserComponents/MenuDetails/MenuDetails";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
             {
               path: "/cart",
               element: <UserRoute><Cart/></UserRoute>
+            },
+            {
+              path: "/details/:id",
+              element: <MenuDetails/>,
+              loader: async ({params}) => fetch(`${domain}/api/menu/${params?.id}/`)
             },
         ]
 

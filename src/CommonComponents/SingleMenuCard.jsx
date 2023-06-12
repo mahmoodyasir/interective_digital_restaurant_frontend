@@ -13,6 +13,20 @@ const SingleMenuCard = ({item}) => {
     const [cartId, setCartId] = useState(null);
     const navigate = useNavigate();
 
+    const totalStars = 5;
+    const rating = item?.ratings
+
+    let rem = totalStars - rating
+    let newfull = Math.floor(rating)
+    let newempty = Math.floor(rem)
+    let newhalf = Math.ceil(rem - newempty)
+
+    const stardata = [
+        {"fullstar": newfull},
+        {"halfstar": newhalf},
+        {"emtystar": newempty}
+    ]
+
     let cart_product_length = 0
     if (cart_incomplete !== null) {
         cart_product_length = cart_incomplete?.cartproduct?.length
@@ -129,17 +143,28 @@ const SingleMenuCard = ({item}) => {
                 </div>
 
                 <div className="flex justify-start">
-                    <BsStarFill className="text-yellow-400 font-bold text-2xl"/>
-                    <BsStarFill className="text-yellow-400 font-bold text-2xl"/>
-                    <BsStarFill className="text-yellow-400 font-bold text-2xl"/>
-                    <BsStarFill className="text-yellow-400 font-bold text-2xl"/>
-                    <BsStarHalf className="text-yellow-400 font-bold text-2xl"/>
+                    {
+                        [...new Array(stardata[0]?.fullstar)].map((item, i) => (
+                            <BsStarFill key={i} className="text-yellow-400 font-bold text-2xl"/>
+                        ))
+                    }
+                    {
+                        [...new Array(stardata[1]?.halfstar)].map((item, i) => (
+                            <BsStarHalf key={i} className="text-yellow-400 font-bold text-2xl"/>
+                        ))
+                    }
+                    {
+                        [...new Array(stardata[2]?.emtystar)].map((item, i) => (
+                            <BsStar key={i} className="text-yellow-400 font-bold text-2xl"/>
+                        ))
+                    }
                 </div>
 
 
                 <div className="">
-                    <p className="text-start">{item?.description?.slice(0, 100) + " ..... "}<Link to="#"
-                                                                                                  className="btn btn-xs btn-outline btn-info">See
+                    <p className="text-start">{item?.description?.slice(0, 100) + " ..... "}<Link
+                        to={`/details/${item?.id}`}
+                        className="btn btn-xs btn-outline btn-info">See
                         Details </Link></p>
 
                 </div>
@@ -149,16 +174,23 @@ const SingleMenuCard = ({item}) => {
                         <>
                             <div className="">
                                 <div className="join w-full">
-                                    <button onClick={() => decrease_cart(cartId)} className="btn btn-error join-item w-2/5 text-3xl">-</button>
-                                    <button style={{backgroundColor: "white", color: "black"}} className="btn btn-ghost join-item w-1/5 text-xl font-bold" disabled={true}>{quantity}</button>
-                                    <button onClick={() => increase_cart(cartId)} className="btn btn-success join-item w-2/5 text-3xl">+</button>
+                                    <button onClick={() => decrease_cart(cartId)}
+                                            className="btn btn-error join-item w-2/5 text-3xl">-
+                                    </button>
+                                    <button style={{backgroundColor: "white", color: "black"}}
+                                            className="btn btn-ghost join-item w-1/5 text-xl font-bold"
+                                            disabled={true}>{quantity}</button>
+                                    <button onClick={() => increase_cart(cartId)}
+                                            className="btn btn-success join-item w-2/5 text-3xl">+
+                                    </button>
                                 </div>
                             </div>
                         </>
                         :
                         <>
                             <div>
-                                <Link onClick={() => addtocart(item?.id)} to="#" className="btn btn-outline btn-success w-full">Add to Cart</Link>
+                                <Link onClick={() => addtocart(item?.id)} to="#"
+                                      className="btn btn-outline btn-success w-full">Add to Cart</Link>
                             </div>
                         </>
                 }
