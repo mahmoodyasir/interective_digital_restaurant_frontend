@@ -1,61 +1,60 @@
-import React, {useContext, useState} from 'react';
-import {useForm} from 'react-hook-form'
+import React, {useState} from 'react';
+import {useForm} from "react-hook-form";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {stateContext, useGlobalState} from "../../state/provider";
 import Axios from "axios";
-import {domain, header} from "../../env";
+import {domain} from "../../env";
 import toast from "react-hot-toast";
 
-const Login = () => {
-    const {isLoggedIn, setIsLoggedIn} = useContext(stateContext);
+const AdminLogin = () => {
     const {register, formState: {errors}, handleSubmit} = useForm();
-    const [{profile, page_reload}, dispatch] = useGlobalState();
     const [loginError, setLoginError] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || '/';
-    console.log(from)
+    const from = location.state?.from?.pathname || '/admin';
 
-
-    const handleLogin = async (data) => {
+    const adminLogin = async (data) => {
         setLoginError('')
         await Axios({
             method: "post",
-            url: `${domain}/auth/login/`,
+            url: `${domain}/auth/admin_login/`,
             data: {
                 'email': data?.email,
                 'password': data?.password
             }
         }).then(response => {
-            console.log(response.data['token'])
-            window.localStorage.setItem("token", response.data['token'])
-            setIsLoggedIn(true)
-            if(from === '/')
-            {
-                toast.success("Successfully Logged In !! ")
-                window.location.href = '/'
-            }
-            else
-            {
-                toast.success("Successfully Logged In !! ")
-                navigate(from, {replace: true});
-                navigate(0);
-            }
-        }).catch(_ => {
-            toast.error("Your username or password is incorrect !! Try Again ....");
-        })
+            console.log(response.data['admin_token'])
 
+            if (response.data['error'] === false) {
+                window.localStorage.setItem("admin_token", response.data['admin_token'])
+                if (from === '/admin') {
+                    toast.success("Successfully Logged In !! ")
+                    window.location.href = '/admin'
+                } else {
+                    toast.success("Successfully Logged In !! ")
+                    navigate(from, {replace: true});
+                    navigate(0);
+                }
+            }
+            else if(response.data['error'] === true)
+            {
+                toast.error("You are not authorized. Try with correct Credentials.");
+            }
+
+        }).catch(_ => {
+            toast.error("Your username or password is incorrect");
+        })
     }
 
     return (
-        <div className="md:w-2/4  ml-auto mr-auto rounded-xl login-form">
+        <div className="w-3/4 md:w-3/4 lg:w-2/4  ml-auto mr-auto rounded-xl login-form">
             <div className="md:w-2/4 mx-auto">
 
                 <div>
-                    <div className="card shadow-2xl  glass bg-violet-600">
+                    <div className="card shadow-2xl  glass bg-orange-500">
                         <div className="card-body">
+                            <h1 className="text-center text-white text-xl font-bold italic">ADMIN PORTAL LOGIN</h1>
 
-                            <form onSubmit={handleSubmit(handleLogin)}>
+                            <form onSubmit={handleSubmit(adminLogin)}>
 
                                 <div className="form-control md:w-full ">
                                     <label className="label"> <span className="label-text">Email</span></label>
@@ -84,8 +83,6 @@ const Login = () => {
                                     <p className='text-red-600'>{loginError}</p>
                                 </div>
 
-                                <p>No account ? <Link className="link link-primary " to="/register">Register</Link></p>
-
                             </form>
 
                         </div>
@@ -97,4 +94,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AdminLogin;

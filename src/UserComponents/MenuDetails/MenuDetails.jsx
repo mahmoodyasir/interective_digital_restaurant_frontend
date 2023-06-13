@@ -149,12 +149,11 @@ const MenuDetails = () => {
         }).then(response => {
             console.log(response.data.message.ratings)
             setMyRating(response.data.message.ratings);
-            starRemain = 5 - response.data.message.ratings
         })
     }
 
     return (
-        <div>
+        <div >
             <div className="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 <div>
                     <div className="grid justify-items-center">

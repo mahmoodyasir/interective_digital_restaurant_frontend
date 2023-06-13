@@ -11,19 +11,28 @@ import Home from "../CommonComponents/Home";
 import {domain} from "../env";
 import Cart from "../UserComponents/Order/Cart";
 import MenuDetails from "../UserComponents/MenuDetails/MenuDetails";
+import Order from "../UserComponents/Order/Order";
+import History from "../UserComponents/Order/History";
+import AdminLogin from "../AdminComponents/AdminAuthentication/AdminLogin";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
+        path: "/admin_login",
+        element: <AdminLogin/>
+    },
+    {
         path: "/admin",
-        element: <AdminLayout/>,
+        element: <AdminRoute><AdminLayout/></AdminRoute>,
         children: [
+
             {
                 path: "/admin",
-                element: <Dashboard/>
+                element: <AdminRoute><Dashboard/></AdminRoute>
             },
             {
                 path: "/admin/controlmenu",
-                element: <ControlFood/>
+                element: <AdminRoute><ControlFood/></AdminRoute>
             }
         ]
     },
@@ -51,6 +60,14 @@ const router = createBrowserRouter([
             {
               path: "/cart",
               element: <UserRoute><Cart/></UserRoute>
+            },
+            {
+              path: "/order",
+              element: <UserRoute><Order/></UserRoute>
+            },
+            {
+              path: "/order_history",
+              element: <UserRoute><History/></UserRoute>
             },
             {
               path: "/details/:id",

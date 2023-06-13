@@ -5,6 +5,9 @@ import Axios from "axios";
 import {Navigate, useLocation, useNavigate} from "react-router-dom";
 
 const UserRoute = ({children}) => {
+
+    // HERE We limit the routing components that requires Regular User Authentication
+
     const { isLoggedIn, setIsLoggedIn} = useContext(stateContext);
     const [{profile, page_reload}, dispatch] = useGlobalState();
     const location = useLocation();

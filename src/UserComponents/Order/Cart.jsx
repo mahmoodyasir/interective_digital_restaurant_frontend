@@ -3,6 +3,7 @@ import {useGlobalState} from "../../state/provider";
 import {domain, header} from "../../env";
 import toast from "react-hot-toast";
 import Axios from "axios";
+import {Link} from "react-router-dom";
 
 const Cart = () => {
     const [{cart_incomplete}, dispatch] = useGlobalState();
@@ -156,7 +157,9 @@ const Cart = () => {
                                         <th className="text-xl"><p>{quantity + ' Items'}</p></th>
                                         <th className="text-xl"><p>Total: {' ' + cart_incomplete?.total + ' taka'}</p>
                                         </th>
-                                        <th></th>
+                                        <th className="">
+                                            <Link className="btn btn-outline btn-success w-2/4" to="/order">Order Now</Link>
+                                        </th>
                                     </tr>
                                     </tfoot>
 

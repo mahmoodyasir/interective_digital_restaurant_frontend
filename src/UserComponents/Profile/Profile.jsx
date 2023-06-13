@@ -7,7 +7,7 @@ import Axios from "axios";
 import toast from "react-hot-toast";
 
 const Profile = () => {
-    const {register, formState: {errors}, handleSubmit} = useForm();
+    const {register, reset, formState: {errors}, handleSubmit} = useForm();
     const [{profile, admin_profile, page_reload}, dispatch] = useGlobalState();
     // const [firstname, setFirstname] = useState(profile !== null ? profile?.user_firstname : admin_profile?.admin_firstname);
     // const [lastname, setLastname] = useState(profile !== null ? profile?.user_lastname : admin_profile?.admin_lastname);
@@ -168,7 +168,13 @@ const Profile = () => {
                                            className="input input-sm md:w-full md:max-w-sm"/>
                                     {errors.phone && <p className='text-red-600'>{errors.phone?.message}</p>}
                                 </div>
-                                <input className='btn btn-accent mt-2 btn-sm' value="Update" type="submit"/>
+                                <input onClick={() => reset({
+                                    firstname: profile?.user_firstname !== null ? profile?.user_firstname : '',
+                                    lastname: profile !== null ? profile?.user_lastname : admin_profile?.admin_lastname,
+                                    nid: profile?.user_nid !== null ? profile?.user_nid : '',
+                                    phone: profile?.user_phone !== null ? profile?.user_phone : '',
+
+                                })} className='btn btn-accent w-full mt-4 ' value="Checkout" type="submit"/>
                             </form>
 
                         </div>
@@ -179,7 +185,8 @@ const Profile = () => {
                 <div className="">
                     <h1 className="text-2xl text-indigo-400 font-bold">Change Password</h1>
                     <form onSubmit={handleSubmit(change_password)}>
-                        <div className="card shadow bg-indigo-600 glass grid justify-items-center max-w-md pt-3 pb-6 mt-3">
+                        <div
+                            className="card shadow bg-indigo-600 glass grid justify-items-center max-w-md pt-3 pb-6 mt-3">
                             <div className="form-control md:w-full md:max-w-sm">
                                 <label className="label"> <span
                                     className="label-text">Old Password</span></label>
@@ -197,7 +204,8 @@ const Profile = () => {
                                        className="input md:w-full md:max-w-sm"/>
                                 {errors.newpassword && <p className='text-red-600'>{errors.newpassword?.message}</p>}
                             </div>
-                             <input className='btn btn-accent mt-4 btn-sm md:w-full md:max-w-sm' value="Update" type="submit"/>
+                            <input className='btn btn-accent mt-4 btn-sm md:w-full md:max-w-sm' value="Update"
+                                   type="submit"/>
                         </div>
                     </form>
                 </div>

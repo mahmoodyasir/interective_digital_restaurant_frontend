@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
 import {useGlobalState} from "./state/provider";
-import {domain, header, userToken} from "./env";
+import {admin_header, adminToken, domain, header, userToken} from "./env";
 import Axios from "axios";
 
 const ApiCheck = () => {
     const [{profile, page_reload, admin_profile}, dispatch] = useGlobalState();
 
+    // Getting Regular User Data
     useEffect(() => {
         if (userToken !== null) {
             const getUserProfile = async () => {
@@ -25,6 +26,27 @@ const ApiCheck = () => {
         }
     }, [dispatch, page_reload]);
 
+    // Getting admin user data
+    useEffect(() => {
+        if (adminToken !== null) {
+            const getadmindata = async () => {
+                await Axios({
+                    method: "get",
+                    url: `${domain}/auth/admin_profile/`,
+                    headers: admin_header
+                }).then(response => {
+                    // console.log(response.data["data"])
+                    dispatch({
+                        type: "ADMIN_PROFILE",
+                        admin_profile: response.data["data"][0]
+                    })
+                })
+            }
+            getadmindata()
+        }
+    }, [dispatch, page_reload]);
+
+    // Checking if user is logged in, then CART is complete or not
     useEffect(() => {
         if (userToken !== null) {
             const getcart = async () => {
@@ -58,6 +80,7 @@ const ApiCheck = () => {
         }
     }, [dispatch, page_reload]);
 
+    // Fetching all menu Items on app start
     useEffect(() => {
         const only_product = async () => {
             await Axios({

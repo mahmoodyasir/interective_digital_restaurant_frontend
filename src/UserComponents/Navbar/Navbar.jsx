@@ -61,13 +61,10 @@ const Navbar = () => {
                                     <Link to="/profile"
                                           className={splitLocation[1] === "profile" ? 'now-link each-link' : 'each-link'}>PROFILE</Link>
                                 </li>
-                                <li className='parent-list'>
-                                    <Link to="/orders"
-                                          className={splitLocation[1] === "orders" ? 'now-link each-link' : 'each-link'}>ORDERS</Link>
-                                </li>
+
                                 <li className='parent-list'>
                                     <Link to="/cart"
-                                          className={splitLocation[1] === "cart" ? 'now-link each-link' : 'each-link'}>
+                                          className={splitLocation[1] === "cart" || splitLocation[1] === "order" ? 'now-link each-link' : 'each-link'}>
                                         <div className="indicator">
                                             <span
                                                 className="indicator-item badge badge-success font-bold">{quantity}</span>
@@ -75,6 +72,10 @@ const Navbar = () => {
 
                                         </div>
                                     </Link>
+                                </li>
+                                <li className='parent-list'>
+                                    <Link to="/order_history"
+                                          className={splitLocation[1] === "order_history" ? 'now-link each-link' : 'each-link'}>HISTORY</Link>
                                 </li>
                                 <li className='parent-list'>
                                     <Link to=""
