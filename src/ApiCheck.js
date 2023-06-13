@@ -85,7 +85,7 @@ const ApiCheck = () => {
         const only_product = async () => {
             await Axios({
                 method: "get",
-                url: `${domain}/api/menu/`,
+                url: `${domain}/api/nopagitem/`,
 
             }).then(response => {
                 // console.log(response.data, " ONLY PRODUCTS ");

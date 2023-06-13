@@ -2,7 +2,7 @@ import {createBrowserRouter} from "react-router-dom";
 import AdminLayout from "../Layout/AdminLayout";
 import UserLayout from "../Layout/UserLayout";
 import Dashboard from "../AdminComponents/Dashboard";
-import ControlFood from "../AdminComponents/ControlFood";
+import ControlFood from "../AdminComponents/FoodControl/ControlFood";
 import Login from "../UserComponents/UserAuthentication/Login";
 import Register from "../UserComponents/UserAuthentication/Register";
 import Profile from "../UserComponents/Profile/Profile";

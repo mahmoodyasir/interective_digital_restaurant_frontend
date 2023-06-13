@@ -159,7 +159,7 @@ const History = () => {
                     </>
                     :
                     <>
-
+                        <h1 className="text-3xl text-center text-indigo-600">You Have No Previous Order</h1>
                     </>
             }
         </div>
