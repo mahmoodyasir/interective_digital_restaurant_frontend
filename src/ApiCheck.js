@@ -96,7 +96,7 @@ const ApiCheck = () => {
             })
         }
         only_product()
-    }, [admin_profile]);
+    }, [page_reload]);
 
     return (
         <div>

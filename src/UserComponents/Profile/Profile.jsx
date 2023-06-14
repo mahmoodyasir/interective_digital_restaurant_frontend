@@ -168,13 +168,7 @@ const Profile = () => {
                                            className="input input-sm md:w-full md:max-w-sm"/>
                                     {errors.phone && <p className='text-red-600'>{errors.phone?.message}</p>}
                                 </div>
-                                <input onClick={() => reset({
-                                    firstname: profile?.user_firstname !== null ? profile?.user_firstname : '',
-                                    lastname: profile !== null ? profile?.user_lastname : admin_profile?.admin_lastname,
-                                    nid: profile?.user_nid !== null ? profile?.user_nid : '',
-                                    phone: profile?.user_phone !== null ? profile?.user_phone : '',
-
-                                })} className='btn btn-accent w-full mt-4 ' value="Checkout" type="submit"/>
+                                <input className='btn btn-accent w-full mt-4 ' value="Update" type="submit"/>
                             </form>
 
                         </div>
