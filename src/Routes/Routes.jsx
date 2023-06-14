@@ -17,6 +17,7 @@ import AdminLogin from "../AdminComponents/AdminAuthentication/AdminLogin";
 import AdminRoute from "./AdminRoute";
 import FoodDetails from "../AdminComponents/FoodControl/FoodDetails";
 import ManageOrder from "../AdminComponents/OrderManagement/ManageOrder";
+import CreateAdmin from "../AdminComponents/AdminAuthentication/CreateAdmin";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
             {
                 path: "/admin/manageorders",
                 element: <AdminRoute><ManageOrder/></AdminRoute>
+            },
+            {
+                path: "/admin/profile",
+                element: <AdminRoute><Profile/></AdminRoute>
+            },
+            {
+                path: "/admin/createadmin",
+                element: <AdminRoute><CreateAdmin/></AdminRoute>
             }
         ]
     },

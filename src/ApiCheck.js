@@ -4,7 +4,7 @@ import {admin_header, adminToken, domain, header, userToken} from "./env";
 import Axios from "axios";
 
 const ApiCheck = () => {
-    const [{profile, page_reload, admin_profile}, dispatch] = useGlobalState();
+    const [{page_reload}, dispatch] = useGlobalState();
 
     // Getting Regular User Data
     useEffect(() => {
@@ -35,7 +35,7 @@ const ApiCheck = () => {
                     url: `${domain}/auth/admin_profile/`,
                     headers: admin_header
                 }).then(response => {
-                    // console.log(response.data["data"])
+                    // console.log(response.data["data"][0])
                     dispatch({
                         type: "ADMIN_PROFILE",
                         admin_profile: response.data["data"][0]
@@ -131,6 +131,24 @@ const ApiCheck = () => {
                 })
             }
             allStatus();
+        }
+    }, [page_reload]);
+
+    useEffect(() => {
+        if (adminToken !== null) {
+            const get_all_admin = async () => {
+                await Axios({
+                    method: "get",
+                    url: `${domain}/auth/all_admin_view/`,
+                    headers: admin_header
+                }).then(response => {
+                    dispatch({
+                        type: "ALL_ADMIN",
+                        all_admin: response.data
+                    })
+                })
+            }
+            get_all_admin();
         }
     }, [page_reload]);
 

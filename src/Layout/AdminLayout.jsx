@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import control from '../assets/control.png'
-import dash from '../assets/logo.png'
+import food from '../assets/food.png'
 import chart_fill from '../assets/Chart_fill.png'
 import chart from '../assets/Chart.png'
 import userimg from '../assets/User.png'
@@ -10,22 +10,36 @@ import chat from '../assets/Chat.png'
 import folder from '../assets/Folder.png'
 import sett from '../assets/Setting.png'
 import {Link, Outlet} from "react-router-dom";
-import {MdDashboard, MdFastfood} from "react-icons/md";
+import {MdAdminPanelSettings, MdDashboard, MdFastfood} from "react-icons/md";
 import {BsCartPlusFill} from "react-icons/bs";
+import {CgProfile} from "react-icons/cg";
+import {GrUserAdmin} from "react-icons/gr";
+import {useGlobalState} from "../state/provider";
+import {AiOutlineLogout} from "react-icons/ai";
 
 const AdminLayout = () => {
-
+    const [{},dispatch] = useGlobalState();
     const [open, setOpen] = useState(false);
     const Menus = [
         {title: "Dashboard", src: <MdDashboard/>, anchor: "/admin", data: "Dashboard"},
         {title: "Control Food Menu", src: <MdFastfood/>, anchor: "/admin/controlmenu", data: "Control Food Menu"},
-        // {title: "Accounts", src: userimg, gap: true, anchor: "#"},
         {title: "Order Management", src: <BsCartPlusFill/>, anchor: "/admin/manageorders", data: "Order Management"},
-        // {title: "Search", src: search, anchor: "#"},
+        {title: "My Account", src: <CgProfile/>, gap: true, anchor: "/admin/profile", data: "My Account"},
+        {title: "Create Admin Account", src: <MdAdminPanelSettings/>, anchor: "/admin/createadmin", data: "Create Admin Account"},
         // {title: "Analytics", src: chart, anchor: "#"},
-        // {title: "Files ", src: folder, gap: true, anchor: "#"},
+        // {title: "Logout ", src: <AiOutlineLogout className="rotate-[270deg]"/>, gap: true, anchor: "#", data: "Logout"},
         // {title: "Setting", src: sett, anchor: "#"},
     ];
+
+    const logout = () => {
+        console.log("Logout")
+        window.localStorage.clear()
+        dispatch({
+            type: "ADMIN_PROFILE",
+            admin_profile: null
+        })
+        window.location.href = '/admin_login'
+    }
 
     return (
         <div className="">
@@ -37,13 +51,13 @@ const AdminLayout = () => {
                     alt=""/>
                 <div className="flex gap-x-4 items-center">
                     <img
-                        src={dash}
+                        src={food}
                         className={`cursor-pointer duration-500 ${
                             open && "rotate-[360deg]"
                         }`}
                         alt=""/>
                     <h1 className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"}`}>
-                        Designer
+                        Food Mania
                     </h1>
                 </div>
                 <ul className="pt-6">
@@ -61,6 +75,15 @@ const AdminLayout = () => {
                             </Link>
                         </li>
                     ))}
+
+                    <li>
+                        <Link to="#" onClick={logout} className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 mt-9`}>
+                                <div className="tooltip tooltip-right text-xl" data-tip="Logout">
+                                    <span><AiOutlineLogout className="rotate-[270deg]"/></span>
+                                </div>
+                                <span className={`${!open && "hidden"} origin-left duration-200`}>Logout</span>
+                            </Link>
+                    </li>
                 </ul>
             </div>
             <div className="h-screen pt-7 ml-24 mr-4">

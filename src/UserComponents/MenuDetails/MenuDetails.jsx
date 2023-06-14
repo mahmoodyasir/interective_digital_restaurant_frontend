@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useLoaderData, useNavigate} from "react-router-dom";
+import {Link, useLoaderData, useNavigate, useParams} from "react-router-dom";
 import {BsStarFill, BsStarHalf, BsStar} from "react-icons/bs";
 import {domain, header, userToken} from "../../env";
 import {useGlobalState} from "../../state/provider";
@@ -12,7 +12,14 @@ const MenuDetails = () => {
     const [quantity, setQuantity] = useState(null);
     const [cartId, setCartId] = useState(null);
     const [myRating, setMyRating] = useState(null);
+    const [render, setRender] = useState(null);
     const navigate = useNavigate();
+
+    if(render !== null)
+    {
+        setRender(null)
+        navigate(`/details/${itemdata?.id}`)
+    }
 
     let starRemain = 0;
     if (myRating !== null && myRating !== undefined) {
@@ -82,7 +89,7 @@ const MenuDetails = () => {
             }
             getUserRating()
         }
-    }, []);
+    }, [myRating]);
 
 
     const addtocart = async (id) => {
@@ -149,6 +156,7 @@ const MenuDetails = () => {
         }).then(response => {
             console.log(response.data.message.ratings)
             setMyRating(response.data.message.ratings);
+            setRender(response.data.message.ratings)
         })
     }
 

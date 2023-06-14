@@ -100,7 +100,7 @@ const Profile = () => {
                     </div>
                     <div className="flex flex-col items-center pb-10">
                         <img className="w-24 h-24 mb-3 rounded-full shadow-lg"
-                             src={`${domain}${profile?.profile?.image}`} alt="Bonnie image"/>
+                             src={`${domain}${profile !== null ? profile?.profile?.image : admin_profile?.profile_info?.image}`} alt="Bonnie image"/>
                         <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                             {profile !== null ? profile.user_firstname + " " + profile?.user_lastname :
                                 admin_profile?.admin_firstname + " " + admin_profile?.admin_lastname}
@@ -134,7 +134,7 @@ const Profile = () => {
                                     <label className="label"> <span
                                         className="label-text text-white">Firstname</span></label>
                                     <input type="text" placeholder="First Name ....."
-                                           defaultValue={profile?.user_firstname !== null ? profile?.user_firstname : ''}
+                                           defaultValue={profile !== null ? profile?.user_firstname : admin_profile?.admin_firstname }
                                            {...register("firstname")}
                                            className="input input-sm md:w-full md:max-w-sm"/>
                                     {errors.firstname && <p className='text-red-600'>{errors.firstname?.message}</p>}
@@ -153,7 +153,7 @@ const Profile = () => {
                                 <div className="form-control md:w-full md:max-w-sm">
                                     <label className="label"> <span className="label-text text-white">NID</span></label>
                                     <input type="number" placeholder="NID Number ....."
-                                           defaultValue={profile?.user_nid !== null ? profile?.user_nid : ''}
+                                           defaultValue={profile !== null ? profile?.user_nid : admin_profile?.admin_nid}
                                            {...register("nid")}
                                            className="input input-sm md:w-full md:max-w-sm"/>
                                     {errors.nid && <p className='text-red-600'>{errors.nid?.message}</p>}
@@ -163,7 +163,7 @@ const Profile = () => {
                                     <label className="label"> <span
                                         className="label-text text-white">Phone</span></label>
                                     <input type="phone" placeholder="Phone Number ....."
-                                           defaultValue={profile?.user_phone !== null ? profile?.user_phone : ''}
+                                           defaultValue={profile !== null ? profile?.user_phone : admin_profile?.admin_phone}
                                            {...register("phone")}
                                            className="input input-sm md:w-full md:max-w-sm"/>
                                     {errors.phone && <p className='text-red-600'>{errors.phone?.message}</p>}

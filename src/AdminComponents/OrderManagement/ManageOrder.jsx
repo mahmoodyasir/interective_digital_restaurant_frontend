@@ -58,6 +58,9 @@ const ManageOrder = () => {
 
     return (
         <div>
+            <div className="grid justify-items-center">
+                <h1 className="bg-purple-500 text-white text-4xl rounded px-2 py-1 mb-4">Order Management</h1>
+            </div>
             <div className="card bg-gray-700 ">
                 <div className="overflow-x-auto overflow-y-auto">
                     <table className="table text-white">
