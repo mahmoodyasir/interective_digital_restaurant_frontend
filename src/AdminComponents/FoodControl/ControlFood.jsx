@@ -79,6 +79,23 @@ const ControlFood = () => {
     }
 
 
+    const deleteItem = async (id) => {
+        await Axios({
+            method: "post",
+            url: `${domain}/api/delete_item/`,
+            headers: admin_header,
+            data: {"menu_id": id}
+        }).then(response => {
+            toast.error("Menu Item Deleted");
+            dispatch({
+                type: "PAGE_RELOAD",
+                page_reload: response.data
+            })
+
+        })
+    }
+
+
     return (
         <div>
 
@@ -86,7 +103,8 @@ const ControlFood = () => {
                 toogle !== false ?
                     <>
                         <div>
-                            {newData !== null && <UpdateMenu setToogle={setToogle} newData={newData} category={category} menuId={menuId}/>}
+                            {newData !== null && <UpdateMenu setToogle={setToogle} newData={newData} category={category}
+                                                             menuId={menuId}/>}
                         </div>
                     </>
                     :
@@ -230,12 +248,12 @@ const ControlFood = () => {
                                                     <td className="text-lg font-bold">{item?.price + " BDT"}</td>
                                                     <th>
                                                         <div className="join">
-                                                            <button
+                                                            <button onClick={() => deleteItem(item?.id)}
                                                                 className="btn btn-error join-item hover:text-white hover:bg-red-500">Delete
                                                             </button>
-                                                            <button
-                                                                className="btn btn-info join-item hover:text-white hover:bg-blue-500">Details
-                                                            </button>
+                                                            <Link to={`/admin/details/${item?.id}`}
+                                                                  className="btn btn-info join-item hover:text-white hover:bg-blue-500">Details
+                                                            </Link>
                                                             <button onClick={() => getAddedData(item?.id)}
                                                                     className="btn btn-success join-item hover:text-white hover:bg-green-500">Update
                                                             </button>
