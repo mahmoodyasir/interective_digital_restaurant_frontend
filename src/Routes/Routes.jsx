@@ -16,6 +16,7 @@ import History from "../UserComponents/Order/History";
 import AdminLogin from "../AdminComponents/AdminAuthentication/AdminLogin";
 import AdminRoute from "./AdminRoute";
 import FoodDetails from "../AdminComponents/FoodControl/FoodDetails";
+import ManageOrder from "../AdminComponents/OrderManagement/ManageOrder";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
                 path: "/admin/details/:id",
                 element: <AdminRoute><FoodDetails/></AdminRoute>,
                 loader: async ({params}) => fetch(`${domain}/api/menu/${params?.id}/`)
+            },
+            {
+                path: "/admin/manageorders",
+                element: <AdminRoute><ManageOrder/></AdminRoute>
             }
         ]
     },

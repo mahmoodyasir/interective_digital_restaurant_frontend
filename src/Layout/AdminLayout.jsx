@@ -11,6 +11,7 @@ import folder from '../assets/Folder.png'
 import sett from '../assets/Setting.png'
 import {Link, Outlet} from "react-router-dom";
 import {MdDashboard, MdFastfood} from "react-icons/md";
+import {BsCartPlusFill} from "react-icons/bs";
 
 const AdminLayout = () => {
 
@@ -19,7 +20,7 @@ const AdminLayout = () => {
         {title: "Dashboard", src: <MdDashboard/>, anchor: "/admin", data: "Dashboard"},
         {title: "Control Food Menu", src: <MdFastfood/>, anchor: "/admin/controlmenu", data: "Control Food Menu"},
         // {title: "Accounts", src: userimg, gap: true, anchor: "#"},
-        // {title: "Schedule ", src: cal, anchor: "#"},
+        {title: "Order Management", src: <BsCartPlusFill/>, anchor: "/admin/manageorders", data: "Order Management"},
         // {title: "Search", src: search, anchor: "#"},
         // {title: "Analytics", src: chart, anchor: "#"},
         // {title: "Files ", src: folder, gap: true, anchor: "#"},

@@ -98,6 +98,43 @@ const ApiCheck = () => {
         only_product()
     }, [page_reload]);
 
+    useEffect(() => {
+        if (adminToken !== null) {
+            const allOrders = async () => {
+                await Axios({
+                    method: "get",
+                    url: `${domain}/api/allorders/`,
+                    headers: admin_header
+                }).then(response => {
+                    dispatch({
+                        type: "ALL_ORDERS",
+                        all_orders: response.data
+                    })
+                })
+            }
+            allOrders();
+        }
+    }, [page_reload]);
+
+    useEffect(() => {
+        if (adminToken !== null) {
+            const allStatus = async () => {
+                await Axios({
+                    method: "get",
+                    url: `${domain}/api/order_status/`,
+                    headers: admin_header
+                }).then(response => {
+                    dispatch({
+                        type: "ALL_STATUS",
+                        all_status: response.data
+                    })
+                })
+            }
+            allStatus();
+        }
+    }, [page_reload]);
+
+
     return (
         <div>
 
