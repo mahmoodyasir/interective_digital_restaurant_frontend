@@ -1,12 +1,10 @@
 import React, {createContext, useContext, useReducer, useState} from "react";
-import Axios from "axios";
-import {domain, header} from "../env";
-import toast from "react-hot-toast";
 
 export const Context = createContext();
 export const stateContext = createContext();
 
 export const Globalstate = ({reducer, initialstate, children}) => {
+    // A Provider is used for state mangement
 
     const [currentPage, setCurrentPage] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);

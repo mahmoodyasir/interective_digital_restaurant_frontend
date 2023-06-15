@@ -21,6 +21,8 @@ import CreateAdmin from "../AdminComponents/AdminAuthentication/CreateAdmin";
 import FeedBack from "../UserComponents/FeedBack/FeedBack";
 import FeedBackReview from "../AdminComponents/FeedBackReview/FeedBackReview";
 
+
+// Controls Every Route of the Application
 const router = createBrowserRouter([
     {
         path: "/admin_login",
