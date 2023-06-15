@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {Link, useLocation} from "react-router-dom";
 import './Nav.css'
 import {BsCart4} from "react-icons/bs";
+import logo from '../../assets/food.png'
 import {stateContext, useGlobalState} from "../../state/provider";
 
 const Navbar = () => {
@@ -34,10 +35,10 @@ const Navbar = () => {
         <div className='shadow-md w-full fixed top-0 left-0 z-10'>
             <div className='md:flex items-center justify-between bg-white py-4 md:px-5 px-7'>
                 <Link to="/">
-                    <div className='font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-800'>
-        <span className='text-3xl text-indigo-600 mr-1 pt-2'>
-        <ion-icon name="logo-ionic"></ion-icon>
-        </span>
+                    <div className='font-bold text-2xl cursor-pointer flex items-center  text-gray-800'>
+                    <span>
+                    <img className="w-8/12" src={logo} alt=""/>
+                    </span>
                         Food Mania
                     </div>
                 </Link>
@@ -52,6 +53,11 @@ const Navbar = () => {
                     <li className='parent-list'>
                         <Link to="/"
                               className={splitLocation[1] === "" ? 'now-link each-link' : 'each-link'}>HOME</Link>
+                    </li>
+
+                    <li className='parent-list'>
+                        <Link to="/feedback"
+                              className={splitLocation[1] === "feedback" ? 'now-link each-link' : 'each-link'}>FEEDBACKS</Link>
                     </li>
 
                     {
@@ -76,10 +82,6 @@ const Navbar = () => {
                                 <li className='parent-list'>
                                     <Link to="/order_history"
                                           className={splitLocation[1] === "order_history" ? 'now-link each-link' : 'each-link'}>HISTORY</Link>
-                                </li>
-                                <li className='parent-list'>
-                                    <Link to=""
-                                          className={splitLocation[1] === "feeddbacks" ? 'now-link each-link' : 'each-link'}>FEEDBACKS</Link>
                                 </li>
 
                                 <Link onClick={logout}

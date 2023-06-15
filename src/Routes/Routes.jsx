@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import AdminLayout from "../Layout/AdminLayout";
 import UserLayout from "../Layout/UserLayout";
-import Dashboard from "../AdminComponents/Dashboard";
+import Dashboard from "../AdminComponents/Dashboard/Dashboard";
 import ControlFood from "../AdminComponents/FoodControl/ControlFood";
 import Login from "../UserComponents/UserAuthentication/Login";
 import Register from "../UserComponents/UserAuthentication/Register";
@@ -18,6 +18,8 @@ import AdminRoute from "./AdminRoute";
 import FoodDetails from "../AdminComponents/FoodControl/FoodDetails";
 import ManageOrder from "../AdminComponents/OrderManagement/ManageOrder";
 import CreateAdmin from "../AdminComponents/AdminAuthentication/CreateAdmin";
+import FeedBack from "../UserComponents/FeedBack/FeedBack";
+import FeedBackReview from "../AdminComponents/FeedBackReview/FeedBackReview";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: "/admin/createadmin",
                 element: <AdminRoute><CreateAdmin/></AdminRoute>
+            },
+            {
+                path: "/admin/review_feedback",
+                element: <AdminRoute><FeedBackReview/></AdminRoute>
             }
         ]
     },
@@ -94,6 +100,10 @@ const router = createBrowserRouter([
               element: <MenuDetails/>,
               loader: async ({params}) => fetch(`${domain}/api/menu/${params?.id}/`)
             },
+            {
+                path: "/feedback",
+                element: <FeedBack/>
+            }
         ]
 
     },

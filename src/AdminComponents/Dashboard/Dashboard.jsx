@@ -1,5 +1,5 @@
 import React, {PureComponent, useEffect, useState} from 'react';
-import {useGlobalState} from "../state/provider";
+import {useGlobalState} from "../../state/provider";
 import {
     ComposedChart,
     Line,
@@ -13,7 +13,7 @@ import {
     Scatter,
     ResponsiveContainer,
 } from 'recharts';
-import {admin_header, domain} from "../env";
+import {admin_header, domain} from "../../env";
 import Axios from "axios";
 
 const Dashboard = () => {

@@ -16,6 +16,7 @@ import {CgProfile} from "react-icons/cg";
 import {GrUserAdmin} from "react-icons/gr";
 import {useGlobalState} from "../state/provider";
 import {AiOutlineLogout} from "react-icons/ai";
+import {VscFeedback} from "react-icons/vsc";
 
 const AdminLayout = () => {
     const [{},dispatch] = useGlobalState();
@@ -24,6 +25,7 @@ const AdminLayout = () => {
         {title: "Dashboard", src: <MdDashboard/>, anchor: "/admin", data: "Dashboard"},
         {title: "Control Food Menu", src: <MdFastfood/>, anchor: "/admin/controlmenu", data: "Control Food Menu"},
         {title: "Order Management", src: <BsCartPlusFill/>, anchor: "/admin/manageorders", data: "Order Management"},
+        {title: "Feedback Review", src: <VscFeedback/>, anchor: "/admin/review_feedback", data: "Feedback Review"},
         {title: "My Account", src: <CgProfile/>, gap: true, anchor: "/admin/profile", data: "My Account"},
         {title: "Create Admin Account", src: <MdAdminPanelSettings/>, anchor: "/admin/createadmin", data: "Create Admin Account"},
         // {title: "Analytics", src: chart, anchor: "#"},
