@@ -8,6 +8,7 @@ export const initialstate = {
     all_orders: null,
     all_status: null,
     all_admin: null,
+    all_category: null,
 }
 
 const reducer = (state, action) => {
@@ -56,6 +57,11 @@ const reducer = (state, action) => {
                 return {
                     ...state,
                     all_admin: action.all_admin
+                }
+         case "ALL_CATEGORY":
+                return {
+                    ...state,
+                    all_category: action.all_category
                 }
         default:
             return this.state;

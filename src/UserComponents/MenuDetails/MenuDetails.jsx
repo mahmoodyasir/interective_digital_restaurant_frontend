@@ -12,13 +12,16 @@ const MenuDetails = () => {
     const [quantity, setQuantity] = useState(null);
     const [cartId, setCartId] = useState(null);
     const [myRating, setMyRating] = useState(null);
+    const [ratingId, setRatingId] = useState(null);
     const [render, setRender] = useState(null);
     const navigate = useNavigate();
 
     if (render !== null) {
         setRender(null)
+        setMyRating(null)
         navigate(`/details/${itemdata?.id}`)
     }
+    console.log("Render:", render, "  ", "myrating:", myRating)
 
     let starRemain = 0;
     if (myRating !== null && myRating !== undefined) {
@@ -82,9 +85,10 @@ const MenuDetails = () => {
                     data: {"menuId": itemdata?.id},
                     headers: header
                 }).then(response => {
-                    // console.log(response.data[0]?.ratingScore)
+                    // console.log(response.data[0]?.id)
                     if (response.data[0]?.ratingScore !== null) {
                         setMyRating(response.data[0]?.ratingScore)
+                        setRatingId(response.data[0]?.id)
                     }
                 })
             }
@@ -156,7 +160,23 @@ const MenuDetails = () => {
                 "menuId": itemdata?.id
             }
         }).then(response => {
-            console.log(response.data.message.ratings)
+            // console.log(response.data.message.ratings)
+            setMyRating(response.data.message.ratings);
+            setRender(response.data.message.ratings)
+        })
+    }
+
+    const updateRating = async (rating) => {
+        // Updating Rating Value
+        await Axios({
+            method: "put",
+            url: `${domain}/api/putrating/${ratingId}/`,
+            headers: header,
+            data: {
+                "rating": rating,
+                "menuId": itemdata?.id
+            }
+        }).then(response => {
             setMyRating(response.data.message.ratings);
             setRender(response.data.message.ratings)
         })
@@ -270,11 +290,11 @@ const MenuDetails = () => {
                                                                     <BsStarFill key={i}/>
                                                                 ))
                                                             }
-                                                            {
-                                                                [...new Array(starRemain !== null ? starRemain : 0)].map((item, i) => (
-                                                                    <BsStar key={i}/>
-                                                                ))
-                                                            }
+                                                            {/*{*/}
+                                                            {/*    [...new Array(starRemain !== null ? starRemain : 0)].map((item, i) => (*/}
+                                                            {/*        <BsStar key={i}/>*/}
+                                                            {/*    ))*/}
+                                                            {/*}*/}
                                                         </p>
                                                     </div>
 
@@ -282,23 +302,23 @@ const MenuDetails = () => {
                                                         <h1 className="text-2xl text-white">Rate Again</h1>
                                                         <div className="flex justify-between">
                                                             <div className="tooltip tooltip-left" data-tip="1">
-                                                                <Link onClick={() => ratingValue(1)} to="#"
+                                                                <Link onClick={() => updateRating(1)} to="#"
                                                                       className="text-3xl text-gray-400 hover:text-yellow-400"><BsStarFill/></Link>
                                                             </div>
                                                             <div className="tooltip tooltip-left" data-tip="2">
-                                                                <Link onClick={() => ratingValue(2)} to="#"
+                                                                <Link onClick={() => updateRating(2)} to="#"
                                                                       className="text-3xl text-gray-400 hover:text-yellow-400"><BsStarFill/></Link>
                                                             </div>
                                                             <div className="tooltip tooltip-left" data-tip="3">
-                                                                <Link onClick={() => ratingValue(3)} to="#"
+                                                                <Link onClick={() => updateRating(3)} to="#"
                                                                       className="text-3xl text-gray-400 hover:text-yellow-400"><BsStarFill/></Link>
                                                             </div>
                                                             <div className="tooltip tooltip-left" data-tip="4">
-                                                                <Link onClick={() => ratingValue(4)} to="#"
+                                                                <Link onClick={() => updateRating(4)} to="#"
                                                                       className="text-3xl text-gray-400 hover:text-yellow-400"><BsStarFill/></Link>
                                                             </div>
                                                             <div className="tooltip tooltip-left" data-tip="5">
-                                                                <Link onClick={() => ratingValue(5)} to="#"
+                                                                <Link onClick={() => updateRating(5)} to="#"
                                                                       className="text-3xl text-gray-400 hover:text-yellow-400"><BsStarFill/></Link>
                                                             </div>
                                                         </div>

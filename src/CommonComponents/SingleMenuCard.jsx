@@ -55,7 +55,7 @@ const SingleMenuCard = ({item}) => {
             }
         }
         CheckCartData();
-    }, [cart_product_length, quantity, only_product]);
+    }, [cart_product_length, quantity]);
 
     const addtocart = async (id) => {
         profile !== null ? (
@@ -118,7 +118,9 @@ const SingleMenuCard = ({item}) => {
                         className="badge badge-primary">{item?.category?.title}</span></p>
                 </div>
             </div>
-            <figure><img className="w-full h-64" src={item?.menuImage} alt="books image"/></figure>
+            <figure><img className="w-full h-64" src={item?.menuImage} onError={(e) => {
+                                        e.target.src = `${domain}${item?.menuImage}`
+                                    }} alt="books image"/></figure>
             <div className="card-body">
 
                 <div className="">

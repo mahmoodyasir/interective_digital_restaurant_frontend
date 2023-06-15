@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "../UserComponents/Navbar/Navbar";
 import {Outlet} from "react-router-dom";
+import Footer from "../CommonComponents/Footer";
 
 const UserLayout = () => {
     return (

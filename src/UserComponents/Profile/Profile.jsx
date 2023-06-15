@@ -90,7 +90,7 @@ const Profile = () => {
     }
 
     return (
-        <div className="xl:pl-28 xl:pr-28 ml-auto mr-auto pl-10 pr-10">
+        <div className="xl:pl-28 xl:pr-28 ml-auto mr-auto pl-10 pr-10 mb-8">
 
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-container">
                 <div

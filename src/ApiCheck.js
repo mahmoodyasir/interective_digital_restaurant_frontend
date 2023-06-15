@@ -153,6 +153,22 @@ const ApiCheck = () => {
     }, [page_reload]);
 
 
+    useEffect(() => {
+        const getCategory = async () => {
+            await Axios({
+                method: "get",
+                url: `${domain}/api/category/`,
+            }).then(response => {
+                dispatch({
+                    type: "ALL_CATEGORY",
+                    all_category: response.data
+                })
+            })
+        }
+        getCategory();
+    }, [page_reload]);
+
+
     return (
         <div>
 

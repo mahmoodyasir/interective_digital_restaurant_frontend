@@ -6,6 +6,7 @@ import {useGlobalState} from "../../state/provider";
 import {BsStar, BsStarFill, BsStarHalf} from "react-icons/bs";
 import {Link} from "react-router-dom";
 import toast from "react-hot-toast";
+import Footer from "../../CommonComponents/Footer";
 
 const FeedBack = () => {
 
@@ -84,7 +85,7 @@ const FeedBack = () => {
 
 
     return (
-        <div className="my-container">
+        <div className="my-container mb-8">
             <div>
 
                 <div>
