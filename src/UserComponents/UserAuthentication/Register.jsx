@@ -32,13 +32,17 @@ const Register = () => {
                     navigate('/login');
 
                 }
+                else if(response.data["error"] === true)
+                {
+                    toast.error("An User Already Exists !");
+                }
             })
         }
     }
 
     return (
         <div>
-            <div className="md:w-2/4  ml-auto mr-auto rounded-xl login-form">
+            <div className="md:w-2/4  ml-auto mr-auto rounded-xl login-form md:mt-12">
             <div className="md:w-3/4 mx-auto">
 
                 <div>
@@ -49,7 +53,7 @@ const Register = () => {
 
                                 <div className="form-control md:w-full">
                                     <label className="label"> <span className="label-text">Email</span></label>
-                                    <input type="text" placeholder="Type Email ....."
+                                    <input type="email" placeholder="Type Email ....."
                                            {...register("email", {
                                                required: "Please Provide Email Address"
                                            })}
